@@ -185,28 +185,21 @@
   // Trigger once on load
   setTimeout(revealOnScroll, 100);
 
-  // --- Active nav link highlighting ---
-  var sections = document.querySelectorAll('section[id]');
+  // --- Active nav link highlighting (Multi-page) ---
   var navLinks = document.querySelectorAll('.nav__link');
-
-  function highlightNav() {
-    var y = window.scrollY + header.offsetHeight + 100;
-
-    sections.forEach(function (section) {
-      var top = section.offsetTop;
-      var height = section.offsetHeight;
-      var id = section.getAttribute('id');
-
-      if (y >= top && y < top + height) {
-        navLinks.forEach(function (link) {
-          link.classList.remove('nav__link--active');
-          if (link.getAttribute('href') === '#' + id) {
-            link.classList.add('nav__link--active');
-          }
-        });
-      }
-    });
+  var currentPath = window.location.pathname;
+  var currentPage = currentPath.split("/").pop();
+  if (currentPage === "" || currentPage === "/" || currentPage === "index.html") {
+    currentPage = "index.html";
   }
 
-  window.addEventListener('scroll', highlightNav, { passive: true });
+  navLinks.forEach(function (link) {
+    link.classList.remove('nav__link--active');
+    var linkHref = link.getAttribute('href');
+    
+    // Exact match for most pages, or if we are on index handling the anchor links
+    if (linkHref === currentPage || (currentPage === "index.html" && linkHref.startsWith("index.html"))) {
+      link.classList.add('nav__link--active');
+    }
+  });
 })();
