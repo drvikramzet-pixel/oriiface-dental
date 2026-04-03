@@ -68,7 +68,7 @@
         window.open(whatsappUrl, '_blank');
 
         var formEl = document.getElementById('contact-form');
-        formEl.innerHTML = '<div style="text-align:center;padding:2rem 0"><h3 style="font-family:var(--font-heading);margin-bottom:0.5rem;color:var(--color-primary)">Request Sent</h3><p style="color:var(--color-text-light)">We will get back to you shortly. You can also reach us at 095406 70276.</p></div>';
+        formEl.innerHTML = '<div style="text-align:center;padding:2rem 0"><h3 style="font-family:var(--font-heading);margin-bottom:0.5rem;color:var(--color-primary)">Request Sent</h3><p style="color:var(--color-text-light)">We will get back to you shortly. You can also reach us at 095406 70276 or 7206263981.</p></div>';
       }, 600);
     });
   }
