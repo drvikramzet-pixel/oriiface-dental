@@ -139,16 +139,20 @@
   var navLinks = document.querySelectorAll('.nav__link');
   var currentPath = window.location.pathname;
   var currentPage = currentPath.split("/").pop();
-  if (currentPage === "" || currentPage === "/" || currentPage === "index.html") {
-    currentPage = "index.html";
+  
+  // Strip .html from currentPage to support Clean URLs
+  currentPage = currentPage.replace('.html', '');
+  
+  if (currentPage === "" || currentPage === "/" || currentPage === "index") {
+    currentPage = "index";
   }
 
   navLinks.forEach(function (link) {
     link.classList.remove('nav__link--active');
-    var linkHref = link.getAttribute('href');
+    var linkHref = link.getAttribute('href').replace('.html', '');
     
     // Exact match for most pages, or if we are on index handling the anchor links
-    if (linkHref === currentPage || (currentPage === "index.html" && linkHref.startsWith("index.html"))) {
+    if (linkHref === currentPage || (currentPage === "index" && linkHref.startsWith("index"))) {
       link.classList.add('nav__link--active');
     }
   });
