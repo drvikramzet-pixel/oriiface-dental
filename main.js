@@ -152,4 +152,32 @@
       link.classList.add('nav__link--active');
     }
   });
+
+  // --- Modern Intersection Observer for Fade Up Animations ---
+  var fadeUpElements = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+    var observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeUpElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  } else {
+    // Fallback
+    fadeUpElements.forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+
 })();
